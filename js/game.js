@@ -1,3 +1,17 @@
+window.onload = function() {
+    let countdown = 3;
+    const timerElement = document.getElementById("timer");
+
+    const interval = setInterval(function() {
+        countdown--;
+        timerElement.textContent = countdown;
+
+        if (countdown <= 0) {
+            clearInterval(interval);
+            window.location.href = "game.html"
+        }
+    }, 1000);
+};
 let enemy_left = 1000;
 let on_ground = true;
 setInterval(() => {
