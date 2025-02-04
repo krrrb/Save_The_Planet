@@ -8,7 +8,7 @@ window.onload = function() {
 
         if (countdown <= 0) {
             clearInterval(interval);
-            window.location.href = "game.html"
+            window.location.href = "../html/game.html"
         }
     }, 1000);
 };
