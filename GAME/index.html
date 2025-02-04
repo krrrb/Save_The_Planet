@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html id="website" lang="en" onkeydown="jump()">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #website {
+            background-color: black;
+        }
+        #character {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            top: 500px;
+            left: 50px;
+            transition: top 200ms ease-out;
+        }
+        
+        #enemy {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            position: absolute;
+            top: 500px;
+            right: 100px;
+        }
+        
+        #gameOver {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 0px;
+            text-align: center;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="character"></div>
+    <div id="enemy"></div>
+    <div id="gameOver">
+        <h1>Game Over</h1>
+        <button onclick="location.reload()" id="restart">Try again?</button>
+    </div>
+    <script>
+        let enemy_left = 1000;
+        let on_ground = true;
+        let gameOverScreen = document.getElementById('gameOver');
+        let gameRunning = true;
+
+        function endGame() {
+            gameOverScreen.style.display = 'block';
+            gameRunning = false;
+        }
+
+        function updateGame() {
+            if (!gameRunning) return;
+            enemy.style.left = enemy_left + 'px';
+            enemy_left -= 10;
+            if (enemy_left < 150 && on_ground) {
+                endGame();
+            }
+            if (enemy_left < 0) {
+                enemy_left = 1000;
+            }
+            requestAnimationFrame(updateGame);
+        }
+        
+        updateGame();
+
+        function jump() {
+            if (!gameRunning) return;
+            character.style.top = '250px';
+            on_ground = false;
+            setTimeout(() => {
+                character.style.top = '500px';
+            }, 200);
+            setTimeout(() => {
+                on_ground = true;
+            }, 900);
+        }
+    </script>
+</body>
+</html>
