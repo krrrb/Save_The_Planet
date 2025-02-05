@@ -1,6 +1,6 @@
 //Diese Funktion ist der Timer und leitet nach Ablauf auf die game.html weiter.
 window.onload = function() {
-    let countdown = 3;
+    let countdown = 4;
     const timerElement = document.getElementById("timer");
 
     const interval = setInterval(function() {
@@ -38,3 +38,23 @@ function jump() {
         on_ground = true;
     }, 400);
 }
+// Dies ist der Gametimer, welcher während des Spiels kontinuierlich mitlaufen soll.
+let timer = 0; // Timer-Variable in Millisekunden
+let gameActive = true; // Flag, um den Spielstatus zu verfolgen
+
+// Timer-Intervall
+const timerInterval = setInterval(() => {
+    if (gameActive) {
+        timer += 100; // Timer um 100 Millisekunden erhöhen
+        
+        // Zeit in Minuten und Sekunden umrechnen
+        const minutes = Math.floor((timer / 1000) / 60);
+        const seconds = Math.floor((timer / 1000) % 60);
+        
+        // Formatieren der Zeit im Format "00:00"
+        const formattedTime = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+        
+        // Timer anzeigen
+        document.getElementById('gametimer').textContent = formattedTime;
+    }
+}, 100); // Alle 100 Millisekunden erhöhen
