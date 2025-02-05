@@ -1,3 +1,4 @@
+//Diese Funktion ist der Timer und leitet nach Ablauf auf die game.html weiter.
 window.onload = function() {
     let countdown = 3;
     const timerElement = document.getElementById("timer");
