@@ -45,9 +45,14 @@ document.getElementById('erde').style.backgroundImage = "url('img/erde_over.png'
 ```
 ## weltall in der js:
 ```
-let weltall_position = 0;
-    setInterval(function() {
-    weltall_position += 2;
-    document.getElementById('weltall').style.backgroundPosition = weltall_position + "px 0px";
-}, 10);
+// Position des Hintergrunds des Weltalls wird animiert
+var weltall_position = 0;
+setInterval(
+    function() {
+        weltall_position += 2;
+        document.getElementById('weltall').style.backgroundPosition = weltall_position + "px 0px";
+    },
+    10
+);
+
 ```
