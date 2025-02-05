@@ -8,6 +8,24 @@ let countdown = 3;
 let countdownInterval;
 let gameOver = false; // New flag to track if the game is over
 
+// Diese Funktion ist der Timer und leitet nach Ablauf auf die game.html weiter.
+window.onload = function() {
+    // This starts the countdown on page load
+    countdown = 3;
+    timerElement.textContent = countdown;
+
+    countdownInterval = setInterval(function() {
+        countdown--;
+        timerElement.textContent = countdown;
+
+        if (countdown <= 0) {
+            clearInterval(countdownInterval);
+            gameRunning = true;
+            window.location.href = "game.html"; // Redirect to game page when countdown ends
+        }
+    }, 1000);
+};
+
 function startCountdown() {
     countdown = 3;
     timerElement.textContent = countdown;
