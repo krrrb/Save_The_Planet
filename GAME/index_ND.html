@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html id="website" lang="en" onkeydown="jump()">
+<html id="website" lang="en" onkeydown="handleKeyPress(event)">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,7 +47,7 @@
     <div id="enemy"></div>
     <div id="gameOver">
         <h1>Game Over</h1>
-        <button onclick="location.reload()" id="restart">Try again?</button>
+        <button onclick="resetGame()" id="restart">Try again?</button>
     </div>
     <script>
         let enemy_left = 1000;
@@ -85,6 +85,26 @@
             setTimeout(() => {
                 on_ground = true;
             }, 900);
+        }
+
+        // Handle key presses
+        function handleKeyPress(event) {
+            if (gameRunning) {
+                // Any key press triggers the jump
+                jump();
+            } else {
+                // Reset the game if any key is pressed after game over
+                resetGame();
+            }
+        }
+
+        // Reset the game when button or any key is pressed
+        function resetGame() {
+            gameOverScreen.style.display = 'none'; // Hide game over screen
+            enemy_left = 1000;
+            on_ground = true;
+            gameRunning = true;
+            updateGame(); // Restart the game loop
         }
     </script>
 </body>
