@@ -2,6 +2,8 @@
 ### in der datei wie-bilder-implementieren.md sind einige der vielen möglichkeiten aufgezeigt wie die bilder implementiert werden könnten.
 
 ![spieler](erde_ground.png)
-![toter spieler](erde_over.png)
+![spieler_sprung](erde_jump.png)
+![spieler_tot](erde_collision.png)
 ![gegner](asteroid.png)
+![gegner_kollision](asteroid_collision.png)
 ![hintergrund](weltall.png)
