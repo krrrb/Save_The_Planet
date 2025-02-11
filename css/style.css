@@ -10,11 +10,17 @@ body {
 }
 
 #timer {
-    font-size: 48px;
+    font-size: 56px;
     margin-bottom: 20px;
     color: #ffffff;
 }
-
+#gametimer{
+    align-items: normal;
+    margin-top: 10px;
+    font-size: 56px;
+    height: 150px;
+    color: #ffffff;
+}
 #game {
     text-align: center;
     display: none;

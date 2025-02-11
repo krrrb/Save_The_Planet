@@ -8,11 +8,11 @@ let countdown = 3;
 let countdownInterval;
 let gameOver = false; // New flag to track if the game is over
 
-// Diese Funktion ist der Timer und leitet nach Ablauf auf die game.html weiter.
+
+//Diese Funktion ist der Timer und leitet nach Ablauf auf die game.html weiter.
 window.onload = function() {
-    // This starts the countdown on page load
-    countdown = 3;
-    timerElement.textContent = countdown;
+    let countdown = 4;
+    const timerElement = document.getElementById("timer");
 
     countdownInterval = setInterval(function() {
         countdown--;
@@ -25,22 +25,26 @@ window.onload = function() {
         }
     }, 1000);
 };
+// Dies ist der Gametimer, welcher während des Spiels kontinuierlich mitlaufen soll.
+let timer = 0; // Timer-Variable in Millisekunden
+let gameActive = true; // Flag, um den Spielstatus zu verfolgen
 
-function startCountdown() {
-    countdown = 3;
-    timerElement.textContent = countdown;
-
-    countdownInterval = setInterval(function() {
-        countdown--;
-        timerElement.textContent = countdown;
-
-        if (countdown <= 0) {
-            clearInterval(countdownInterval);
-            gameRunning = true;
-            window.location.href = "game.html"; // Redirect to game page when countdown ends
-        }
-    }, 1000);
-}
+// Timer-Intervall
+const timerInterval = setInterval(() => {
+    if (gameActive) {
+        timer += 100; // Timer um 100 Millisekunden erhöhen
+        
+        // Zeit in Minuten und Sekunden umrechnen
+        const minutes = Math.floor((timer / 1000) / 60);
+        const seconds = Math.floor((timer / 1000) % 60);
+        
+        // Formatieren der Zeit im Format "00:00"
+        const formattedTime = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+        
+        // Timer anzeigen
+        document.getElementById('gametimer').textContent = formattedTime;
+    }
+}, 100); // Alle 100 Millisekunden erhöhen
 
 function updateGame() {
     if (!gameRunning) return;
