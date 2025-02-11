@@ -7,9 +7,10 @@ let gameRunning = false;
 let countdown = 3;
 let countdownInterval;
 let gameOver = false; // New flag to track if the game is over
+let timer = 0; // Timer-Variable in milliseconds
 
 
-//Diese Funktion ist der Timer und leitet nach Ablauf auf die game.html weiter.
+//countdown function to redirect the html page to game.html after timer has run out 
 window.onload = function() {
     let countdown = 4;
     const timerElement = document.getElementById("timer");
@@ -25,26 +26,37 @@ window.onload = function() {
         }
     }, 1000);
 };
-// Dies ist der Gametimer, welcher während des Spiels kontinuierlich mitlaufen soll.
-let timer = 0; // Timer-Variable in Millisekunden
-let gameActive = true; // Flag, um den Spielstatus zu verfolgen
-
+// gametimer which should be running while game is active
 // Timer-Intervall
 const timerInterval = setInterval(() => {
-    if (gameActive) {
-        timer += 100; // Timer um 100 Millisekunden erhöhen
+    if (gameRunning) {
+        timer += 100; // rate by which timer is increased 
         
-        // Zeit in Minuten und Sekunden umrechnen
+        // calculating the time in minutes and seconds
         const minutes = Math.floor((timer / 1000) / 60);
         const seconds = Math.floor((timer / 1000) % 60);
         
-        // Formatieren der Zeit im Format "00:00"
+        // formatting the time to "00:00"
         const formattedTime = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
         
-        // Timer anzeigen
+        // show timer
         document.getElementById('gametimer').textContent = formattedTime;
+    } else {
+        // Stop the timer
+        clearInterval(timerInterval);
+
+        // calculating the final time in minutes and seconds
+        const minutes = Math.floor((timer / 1000) / 60);
+        const seconds = Math.floor((timer / 1000) % 60);
+
+        // formatting the final time to "00:00"
+        const formattedTime = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+
+        // Display the final time (e.g., in console or on the page)
+        console.log('Timer stopped! You survived for: ' + formattedTime);
+        document.getElementById('gametimer').textContent = 'You survived for: ' + formattedTime;
     }
-}, 100); // Alle 100 Millisekunden erhöhen
+}, 100); // increase every 100 milliseconds
 
 function updateGame() {
     if (!gameRunning) return;
