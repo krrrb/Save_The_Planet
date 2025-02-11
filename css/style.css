@@ -6,6 +6,7 @@ body {
     justify-content: center;
     height: 100vh;
     background-color: #000000;
+    margin: 0; /* Ensure there's no unwanted margin */
 }
 
 #timer {
@@ -18,9 +19,11 @@ body {
     text-align: center;
     display: none;
 }
+
 #website {
     background-color: rgb(0, 0, 0);
 }
+
 #character {
     width: 100px;
     height: 100px;
@@ -38,4 +41,39 @@ body {
     position: absolute;
     top: 500px;
     right: 100px;
+}
+
+#gameOver {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#restart {
+    display: block;
+    margin: 0 auto; /* Horizontally center the button */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center; /* Ensure text is centered inside the button */
+}
+
+#restart:hover {
+    background-color: #45a049;
+}
+
+#restart:focus {
+    outline: none; /* Remove focus outline for better aesthetics */
 }
