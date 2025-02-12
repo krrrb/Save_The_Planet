@@ -29,6 +29,15 @@ function moveBg() {
     animate();
 }
 
+function startBackgroundMusic() {
+    backgroundMusic.loop = true; 
+    backgroundMusic.play();
+}
+
+function stopBackgroundMusic() {
+    backgroundMusic.pause();
+    backgroundMusic.currentTime = 0;
+}
 
 //countdown function to redirect the html page to game.html after timer has run out 
 window.onload = function() {
@@ -119,6 +128,7 @@ function endGame() {
     restartButton.style.display = 'block';
     gameRunning = false;
     deathSound.play();
+    stopBackgroundMusic();
 }
 
 function resetGame() {
@@ -132,6 +142,8 @@ function resetGame() {
 // Handle game page load
 if (window.location.pathname.endsWith("game.html")) {
     window.onload = function() {
+        document.addEventListener("click", startBackgroundMusic, { once: true });
+        document.addEventListener("keydown", startBackgroundMusic, { once: true });
         moveBg();
         gameRunning = true;
         updateGame(); // Start the game loop
