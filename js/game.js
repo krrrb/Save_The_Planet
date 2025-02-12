@@ -9,6 +9,26 @@ let countdownInterval;
 let gameOver = false; // New flag to track if the game is over
 let timer = 0; // Timer-Variable in milliseconds
 
+let jumpSound = new Audio('../sfx/jump.mp3');
+let deathSound = new Audio('../sfx/death.mp3');
+let backgroundMusic = new Audio('../sfx/music.mp3');
+
+backgroundMusic.loop = true;
+backgroundMusic.play();
+
+function moveBg() {
+    let pos = 0;
+    const bgEl = document.getElementById('background');
+    const bgSpeed = 2;
+
+    function animate() {
+        pos += bgSpeed;
+        bgEl.style.backgroundPosition = pos + "px 0px";
+        requestAnimationFrame(animate);
+    }
+    animate();
+}
+
 
 //countdown function to redirect the html page to game.html after timer has run out 
 window.onload = function() {
@@ -76,6 +96,7 @@ function jump() {
     if (!gameRunning || gameOver) return; // Prevent jumping after game is over
     character.style.top = '250px';
     on_ground = false;
+    jumpSound.play();
     setTimeout(() => {
         character.style.top = '500px';
     }, 200);
@@ -97,6 +118,7 @@ function endGame() {
     gameOverScreen.style.display = 'block';
     restartButton.style.display = 'block';
     gameRunning = false;
+    deathSound.play();
 }
 
 function resetGame() {
@@ -110,6 +132,7 @@ function resetGame() {
 // Handle game page load
 if (window.location.pathname.endsWith("game.html")) {
     window.onload = function() {
+        moveBg();
         gameRunning = true;
         updateGame(); // Start the game loop
     };
