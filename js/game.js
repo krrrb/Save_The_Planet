@@ -106,10 +106,13 @@ function jump() {
     character.style.top = '250px';
     on_ground = false;
     jumpSound.play();
+    document.getElementById("character").style.backgroundImage = "url('../img/erde_jump.png')";
     setTimeout(() => {
+        document.getElementById("character").style.backgroundImage = "url('../img/erde_jump.png')";
         character.style.top = '500px';
     }, 200);
     setTimeout(() => {
+        document.getElementById("character").style.backgroundImage = "url('../img/erde_ground.png')";
         on_ground = true;
     }, 900);
 }
@@ -124,6 +127,8 @@ function handleKeyPress(event) {
 
 function endGame() {
     gameOver = true; // Set game over flag
+    document.getElementById("character").style.backgroundImage = "url('../img/erde_collision.png')";
+    document.getElementById("enemy").style.backgroundImage = "url('../img/asteroid_collision.png')";
     gameOverScreen.style.display = 'block';
     restartButton.style.display = 'block';
     gameRunning = false;
