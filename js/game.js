@@ -63,7 +63,7 @@ function moveEnemy() {
 
 function handleGameOver() {
     const noNewHighscoreMessage = `Du hast über 8 Millarden Menschen auf dem gewissen!<br><br>Um es nochmals zu versuchen, drücke die <span style="color: orange;">Leertaste</span>.`;
-    let newHighscoreMessage = `Du hast zwar über 8 Millarden Menschen auf dem gewissen,<br><br>aber zumindest hast du einen NEUEN HIGHSCORE von ${score} aufgestellt!.<br><br>Um es nochmals zu versuchen, drücke die <span style="color: orange;">Leertaste</span>.`;
+    let newHighscoreMessage = `Du hast zwar über 8 Millarden Menschen auf dem gewissen,<br><br>aber zumindest hast du einen NEUEN HIGHSCORE von ${score} aufgestellt!<br><br>Um es nochmals zu versuchen, drücke die <span style="color: orange;">Leertaste</span>.`;
     countdownEl.innerHTML = score > highscore ? newHighscoreMessage : noNewHighscoreMessage;
     sfx_music.pause();
     sfx_music.currentTime = 0;
