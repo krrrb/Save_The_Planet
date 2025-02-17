@@ -2,14 +2,17 @@ document.addEventListener("keydown", function (event) {
     let code = event.code;
     if (code === "F4") {
         resetHighscore();
-    } else if ((code === "Space" || code === "KeyW" || code === "ArrowUp") && (countdownInProgress === false)) {
+    } else if ((code === "Space" || code === "KeyW" || code === "ArrowUp") && (countdownInProgress === false)&& (newHighscoreInput === false)) {
         if (gameStarted) {
             jump();
-         } else if (!countdownDone) {
-             startCountdown();
+        } else if (!countdownDone) {
+            startCountdown();
         } else {
             startGame();
         }
+    } else if ((code === "Enter" || code === "NumpadEnter") && (newHighscoreInput === true)) {
+            saveHighscorePlayerName();
+            newHighscoreInput = false;
     }
 });
 
@@ -62,21 +65,40 @@ function moveEnemy() {
 }
 
 function handleGameOver() {
-    const noNewHighscoreMessage = `Du hast über 8 Millarden Menschen auf dem gewissen!<br><br>Um es nochmals zu versuchen, drücke die <span style="color: orange;">Leertaste</span>.`;
-    let newHighscoreMessage = `Du hast zwar über 8 Millarden Menschen auf dem gewissen,<br><br>aber zumindest hast du einen NEUEN HIGHSCORE von ${score} aufgestellt!<br><br>Um es nochmals zu versuchen, drücke die <span style="color: orange;">Leertaste</span>.`;
-    countdownEl.innerHTML = score > highscore ? newHighscoreMessage : noNewHighscoreMessage;
+    let newHighscoreMessage =
+    `<span id="inputPrompt1">Du hast zwar über 8 Millarden Menschen auf dem Gewissen,<br><br>
+    aber zumindest hast du einen neuen highscore von ${score} aufgestellt!<br><br>
+    Verewige dich in den Trümmern zu und bestätige mit <span style="color: red;">Enter</span>.</span><br><br>
+    <span id="inputPrompt2" style="display: none">Um es nochmals zu versuchen, drücke die <span style="color: orange;">Leertaste</span>.</span>`;
+    const noNewHighscoreMessage = 
+    `<span>Du hast über 8 Millarden Menschen auf dem Gewissen!<br><br>
+    Um es nochmals zu versuchen, drücke die <span style="color: orange;">Leertaste</span></span>.`;
     sfx_music.pause();
     sfx_music.currentTime = 0;
     sfx_dead.play();
     playerEl.style.backgroundImage = "var(--player-collision)";
     enemyEl.style.backgroundImage = "var(--enemy-collision)";
     gameOver = true;
-    saveHighscore();
-    setTimeout(function () {
+
+    if (score > highscore) {
+        countdownEl.innerHTML = newHighscoreMessage;
+        inputFieldEl.style.display = "block";
+        inputFieldEl.value = "";
+        saveHighscore();
+        setTimeout(function () {
+            startMenuEl.style.display = "flex";
+            updateScores();
+            gameStarted = false;
+            countdownDone = false;
+            inputFieldEl.focus();
+        }, 1000);
+    newHighscoreInput = true; 
+    } else {
+        newHighscoreInput = false;
         startMenuEl.style.display = "flex";
-        updateScores();
+        countdownEl.innerHTML = noNewHighscoreMessage;
         gameStarted = false;
         countdownDone = false;
-    }, 1000);
+        inputFieldEl.style.display = "none";
+    }
 }
-
