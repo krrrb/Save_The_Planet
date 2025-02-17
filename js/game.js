@@ -1,4 +1,4 @@
-let enemy_left = 1000;
+let enemy_left = 1920;
 let on_ground = true;
 let gameOverScreen = document.getElementById('gameOver');
 let restartButton = document.getElementById('restart');
