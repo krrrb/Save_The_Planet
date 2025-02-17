@@ -6,7 +6,7 @@
     --player-alert: url("img/erde_alert.png");
     --player-jump: url("img/erde_jump.png");
     --player-collision: url("img/erde_collision.png");
-    --game-background: url("../img/weltall.png"); /* why does only this work */
+    --game-background: url("../img/weltall.png"); /* strange fix */
     --player-xpos: 20; /* für leichtere übergabe an js ohne px */
     --characters-ypos: 33%;
     --unit: 1px; /*wird verwendet um durch multiplikation mit --player-xpos Xpx zu erhalten */
@@ -71,6 +71,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column; 
 }
 
 .jump {
@@ -87,4 +88,14 @@ body {
     100% {
         transform: translateY(0);
     }
+}
+#inputField {
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 1.5vw;
+        text-align: center;
+        outline: none;
+        caret-color: white; /* Blinkender Cursor */
+        width: 100%;
 }
