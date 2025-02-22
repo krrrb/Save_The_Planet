@@ -6,10 +6,14 @@
     --player-alert: url("img/erde_alert.png");
     --player-jump: url("img/erde_jump.png");
     --player-collision: url("img/erde_collision.png");
-    --game-background: url("../img/weltall.png"); /* strange fix */
-    --player-xpos: 20; /* für leichtere übergabe an js ohne px */
+    --game-background: url("../img/weltall.png"); /* load fix */
+    --player-xpos: 20; /* für leichtere Übergabe an JS ohne px */
     --characters-ypos: 33%;
-    --unit: 1px; /*wird verwendet um durch multiplikation mit --player-xpos Xpx zu erhalten */
+    --pxUnit: 1px; /* wird verwendet um durch Multiplikation mit --player-xpos Xpx zu erhalten */
+    --jump-duration: 600; /* für leichtere Übergabe an JS ohne ms */
+    --msUnit: 1ms;
+    --player-width: 128;
+    --enemy-width: 256;
 }
 
 body {
@@ -24,30 +28,30 @@ body {
     width: 100%;
     height: 100%;
     background-image: var(--game-background);
-    background-repeat: repeat-x; 
+    background-repeat: repeat-x;
     z-index: -1;
 }
 
-#playerCharacter {
+.character {
     position: absolute;
-    width: 128px;
-    height: 128px;
-    left: calc(var(--player-xpos) * var(--unit)); /* Konkatenationtrick */
-    background-image: var(--player-ground);
     bottom: var(--characters-ypos);
+}
+
+#playerCharacter {
+    width: calc(var(--player-width) * var(--pxUnit));
+    height: 128px;
+    left: calc(var(--player-xpos) * var(--pxUnit));
+    background-image: var(--player-ground);
 }
 
 #enemyCharacter {
-    position: absolute;
-    width: 256px;
+    width: calc(var(--enemy-width) * var(--pxUnit));
     height: 128px;
     background-image: var(--enemy);
     right: 0;
-    bottom: var(--characters-ypos);
 }
 
-#currentScoreDisplay,
-#highscoreDisplay {
+#currentScoreDisplay {
     position: absolute;
     top: 1vw;
     left: 1vw;
@@ -56,46 +60,69 @@ body {
     font-weight: bold;
 }
 
-#highscoreDisplay {
-    top: 3vw;
-}
-
 #startMenu {
     position: absolute;
     width: 100%;
     height: 100%;
     font-size: 1.5vw;
     text-align: center;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.4);
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column; 
+    flex-direction: column;
 }
 
+/*in verbindung mit @keyframes dient diese klasse zur flüssigeren sprung animation*/
 .jump {
-    animation: jumpAnimation .6s ease-out;
+    animation: jumpAnimation calc(var(--jump-duration) * var(--msUnit)) ease-out;
 }
 
 @keyframes jumpAnimation {
     0% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-300px);
     }
+
     100% {
         transform: translateY(0);
     }
 }
+
 #inputField {
-        background: transparent;
-        border: none;
-        color: white;
-        font-size: 1.5vw;
-        text-align: center;
-        outline: none;
-        caret-color: white; /* Blinkender Cursor */
-        width: 100%;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.5vw;
+    text-align: center;
+    outline: none;
+    caret-color: white;
+    width: 100%;
+}
+
+.highscore-entry {
+    display: flex;
+    justify-content: space-between;
+    padding: .7vw;
+    border-bottom: 1px solid gray;
+}
+
+.rank {
+    width: 2em;
+    text-align: left;
+}
+
+.name {
+    overflow: hidden;
+    max-width: 17em;
+    text-align: center;
+}
+
+.score {
+    min-width: 2em;
+    text-align: right;
 }
