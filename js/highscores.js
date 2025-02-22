@@ -1,5 +1,5 @@
 function saveHighscorePlayerName() {
-    const highscorePlayerName = inputFieldEl.value.trim();
+    const highscorePlayerName = escapeHtml(inputFieldEl.value.trim());
     if (highscorePlayerName) {
         addHighscore(highscorePlayerName, score);
         highscoresEl.style.display = "block";
@@ -52,7 +52,7 @@ function updateHighscoreDisplay() {
         const div = document.createElement("div");
         div.classList.add("highscore-entry");
         div.innerHTML = `<div class='rank'>${index + 1}.</div>
-                            <div class='name'>${entry.name}</div>
+                            <div class='name'>${escapeHtml(entry.name)}</div>
                             <div class='score'>${entry.score}</div>`;
         highscoresEl.appendChild(div);
     });
@@ -69,4 +69,15 @@ function isNewHighscore(score) {
     }
 
     return false;
+}
+
+function escapeHtml(filtern) { // filtert die nutzereingaben. innerHTMLs durch textContents zu esetzten wäre besser aber umständlicher zu ändern.
+    return filtern
+        .replace(/&/g, "")
+        .replace(/</g, "")
+        .replace(/>/g, "")
+        .replace(/"/g, "")
+        .replace(/'/g, "")
+        .replace(/\(/g, "")
+        .replace(/\)/g, "");
 }
