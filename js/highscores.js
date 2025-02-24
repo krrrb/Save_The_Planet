@@ -79,5 +79,7 @@ function escapeHtml(filtern) { // filtert die nutzereingaben. innerHTMLs durch t
         .replace(/"/g, "")
         .replace(/'/g, "")
         .replace(/\(/g, "")
-        .replace(/\)/g, "");
+        .replace(/\)/g, "")
+        .replace(/\//g, "")
+        .replace(/\\/g, "");;
 }
