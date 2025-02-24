@@ -56,9 +56,9 @@ function moveEnemy() {
         enemyEl.style.backgroundImage = "var(--enemy-alert)";
     }
     enemyEl.style.left = (enemyPos -= enemySpeed) + "px";
-    if (enemyPos < playerWidth + playerXPos && onGround) {
+    if (enemyPos < playerWidth + playerXPos && onGround) {    // vereinfachte kollisionsabfrage möglich, da der enemy sich nur eindimensional bewegt und die 2te deimension des players in onGround gespeichert wird. 
         handleGameOver();
-    } else if (enemyPos < -enemyWidth/4) { // durch 4 sodass nur dar asteroid (der schweif ist ca 3/4) kollisionen auslöst. dirty fix, kollision wird eigentlich weiter geprüft aber nach 1/4 wird der asteroid zurückgesetzt.
+    } else if (enemyPos < -enemyWidth/3) { // durch 3 sodass nur dar asteroid (der schweif ist ca 2/3) kollisionen auslöst. dirty fix, kollision wird eigentlich weiter geprüft aber nach 1/3 wird der asteroid zurückgesetzt.
         enemyPos = window.innerWidth;
         score++;
         updateScores();
